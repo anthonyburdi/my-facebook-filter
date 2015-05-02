@@ -1,0 +1,68 @@
+<!doctype html>
+<title>mytoday</title>
+<form action="/" method=post>
+  <dl>
+  	<dt>Please enter your facebook access token from <a href="https://developers.facebook.com/tools/explorer">https://developers.facebook.com/tools/explorer</a>:
+  		<dd><input type=text name=token>
+  		<dd><input type=submit value=Submit>
+  </dl>
+</form>
+<br>
+
+{% if num_notifications %}
+  You have {{ num_notifications }} notification(s).<br>
+{% endif %}
+
+<br>
+
+{% if comments %}
+  Comments:<br>
+  {% for comment in comments %}
+  <a href="{{ comment['link'] }}" target="_blank">{{ comment['title'] }}</a><br>
+  {% endfor %}
+{% endif %}
+
+<br>
+
+{% if friend_requests %}
+  Friend Requests:<br>
+  {% for fr in friend_requests %}
+  <a href="{{ fr['link'] }}" target="_blank">{{ fr['title'] }}</a><br>
+  {% endfor %}
+{% endif %}
+
+<br>
+
+{% if group_notifications %}
+  Group Notifications:<br>
+  {% for gn in group_notifications %}
+  <a href="{{ gn['link'] }}" target="_blank">{{ gn['title'] }}</a><br>
+  {% endfor %}
+{% endif %}
+
+<br>
+
+{% if event_notifications %}
+  Event Notifications:<br>
+  {% for en in event_notifications %}
+  <a href="{{ en['link'] }}" target="_blank">{{ en['title'] }}</a><br>
+  {% endfor %}
+{% endif %}
+
+<br>
+
+{% if inbox %}
+  Inbox:<br>
+  {% for en in inbox %}
+  #--INBOX-- {{ inbox['data'] }}<br><br>
+  {% endfor %}
+{% endif %}
+
+<br><br>
+
+{% if notifications %}
+  All notifications:<br>
+  {% for notification in notifications %}
+  #--- {{ notification }}<br><br>
+  {% endfor %}
+{% endif %}
