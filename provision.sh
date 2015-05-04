@@ -19,4 +19,4 @@ source venv/bin/activate
 pip install -r /vagrant/requirements.txt
 
 ## Start Flask App
-python mytoday.py
+python facebook-filter.py

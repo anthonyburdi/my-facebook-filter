@@ -14,13 +14,7 @@ def retrieve():
     error = None
     if request.method == 'POST':
         token = request.form['token'] # receive the entered token
-        # shortlink = shortLink(links) # create shortlink
-        # links[shortlink] = link # place shortlink into global dict
-        # comments = get_comments(token)
-        # notifications, num_notifications = get_all_notifications(token)
-        # friend_requests = get_friend_requests(token)
-        # group_notifications = get_group_notifications(token)
-
+        
         n = separate_notification_types(token)
         inbox = get_inbox(token)
 
@@ -30,7 +24,7 @@ def retrieve():
              event_notifications=n['event_notifications'], 
              inbox=inbox, error=error)
     if request.method == 'GET':
-        return render_template('mytoday.html')
+        return render_template('facebook-filter.html')
 
 def get_all_notifications(token):
     """Get all notifications"""
@@ -69,47 +63,6 @@ def get_inbox(token):
     graph = facebook.GraphAPI(token)
     inbox_items = graph.get_connections(id='me', connection_name='inbox')
     return inbox_items
-
-
-# def get_comments(token):
-#     """Get all comments notifications"""
-#     comments = []
-#     notifications, num_notifications = get_all_notifications(token)
-#     for notification in notifications:
-#         if notification['application']['name'] == 'Feed Comments':
-#             comments.append(notification)
-#     return comments
-
-# def get_friend_requests(token):
-#     """Get all friend request notifications and acceptance notifications"""
-#     friend_requests = []
-#     notifications, num_notifications = get_all_notifications(token)
-#     for notification in notifications:
-#         if notification['application']['name'] == 'Friends':
-#             friend_requests.append(notification)
-#     return friend_requests    
-
-# def get_group_notifications(token):
-#     """Get all group related notifications"""
-#     group_notifications = []
-#     notifications, num_notifications = get_all_notifications(token)
-#     for notification in notifications:
-#         if notification['application']['name'] == 'Groups':
-#             group_notifications.append(notification)
-#     return group_notifications
-
-# @app.route('/', methods=['POST', 'GET'])
-# def shorten():
-#   """Create a shortlink from input link"""
-#   error = None
-#   if request.method == 'POST':
-#       link = request.form['link'] # receive the entered link
-#       shortlink = shortLink(links) # create shortlink
-#       links[shortlink] = link # place shortlink into global dict
-#       return render_template('shortener.html', link=link, 
-#           shortlink=shortlink, error=error, links=links, my_ip=my_ip)
-#   if request.method == 'GET':
-#       return render_template('shortener.html')
 
 
 
